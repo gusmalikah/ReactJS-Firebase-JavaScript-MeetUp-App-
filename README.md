@@ -1,5 +1,7 @@
 # ReactJS-FireBase-JavaScript(MeetUp-App)
 This project is created with React JS library. As a database to store the meetups Firebase is used and then the data is fetched from the firebase. This project is a practise project which has the ability to create new meetups, add meetups to favorites and to remove them from favorites at the same time.
+![46d52586da21b67d0a4be23287aada1e](https://user-images.githubusercontent.com/71040758/177218663-0e633ede-d6ab-4071-9c18-bb606dff5660.png)
+
 
 # Getting Started with Create React App
 
