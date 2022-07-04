@@ -1,30 +1,41 @@
+import React from "react"
 import MeetupList from "../Components/meetups/MeetupList"
-const Data = [
-    {
-        id: 'm1',
-        title: 'This is a first meetup',
-        image:
-          'https://www.swedishnomad.com/wp-content/images/2020/03/Duomo-di-Milano.jpg',
-        address: 'Meetupstreet 5, 12345 Meetup City',
-        description:
-          'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-      },
-      {
-        id: 'm2',
-        title: 'This is a second meetup',
-        image:
-          'https://www.swedishnomad.com/wp-content/images/2020/03/Duomo-di-Milano.jpg',
-        address: 'Meetupstreet 5, 12345 Meetup City',
-        description:
-          'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-      },
-]
 
 function AllMeetupsPage() {
+  const [isloading, setIsLoading] = React.useState(true)
+  const [loadedMeetups, SetLoadedMeetups] = React.useState([])
+  
+  React.useEffect(() => {
+    setIsLoading(true)
+    fetch("https://react-meetups-e28af-default-rtdb.firebaseio.com/meetups.json"
+  ).then(response => {
+    return response.json()
+  }).then(data => {
+    const meetups = []
+    for(const key in data) {
+      const meetup = {
+        id:key,
+        ...data[key]
+      }
+
+      meetups.push(meetup)
+    }
+    setIsLoading(false)
+    SetLoadedMeetups(meetups)
+  })
+  },[])
+
+  if(isloading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    )
+  }
     return(
         <section>
             <h1>All Meetups</h1>
-            <MeetupList meetups={Data}/>
+            <MeetupList meetups={loadedMeetups}/>
         </section>
     )
 }
